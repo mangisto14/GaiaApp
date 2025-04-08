@@ -1,0 +1,76 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Gaia Project</h1>
+
+<form method="post">
+    <div class="form-group row">
+        <label for="FieldA" class="col-sm-2 col-form-label">Field A:</label>
+        <div class="col-sm-10">
+            <input type="number" asp-for="FieldA" step="any" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="FieldB" class="col-sm-2 col-form-label">Field A:</label>
+        <div class="col-sm-10">
+            <input type="number" asp-for="FieldB" step="any" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="Operation" class="col-sm-2 col-form-label">Operation:</label>
+        <div class="col-sm-10">
+            <select asp-for="Operation">
+                <option value="add">Add</option>
+                <option value="subtract">Subtract</option>
+                <option value="multiply">Multiply</option>
+                <option value="concat">Concat</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <button type="submit">Calculate</button>
+        </div>
+    </div>
+</form>
+
+@if (Model.Result != null)
+{
+    <p>Result: <strong>@Model.Result</strong></p>
+}
+
+@if (Model.HistoryItems.Any())
+{
+    <h3>Last 3 operations of type "@Model.Operation"</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Field A</th>
+                <th>Field B</th>
+                <th>Result</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.HistoryItems)
+            {
+                <tr>
+                    <td>@item.FieldA</td>
+                    <td>@item.FieldB</td>
+                    <td>@item.Result</td>
+                    <td>@item.Timestamp.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@if (Model.OperationCount >= 0)
+{
+    <h3>Total operations of type "@Model.Operation" this month: @Model.OperationCount</h3>
+}
