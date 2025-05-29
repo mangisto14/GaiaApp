@@ -1,0 +1,17 @@
+
+services:
+  gaiaapi:
+    build:
+      context: .
+      dockerfile: GaiaApi/Dockerfile
+    image: $DOCKER_USERNAME/gaiaapi:latest
+    ports:
+      - "5000:5000"
+
+  gaiaweb:
+    build:
+      context: .
+      dockerfile: GaiaWeb/Dockerfile
+    image: $DOCKER_USERNAME/gaiaweb:latest
+    ports:
+      - "5001:5001"
