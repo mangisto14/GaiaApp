@@ -7,6 +7,8 @@ services:
     image: $DOCKER_USERNAME/gaiaapi:latest
     ports:
       - "5000:5000"
+    entrypoint: 
+      - ConnectionStrings__DefaultConnection=Server=192.168.7.15,1433;Database=GaiaDb;User ID=sa;Password=man123;Encrypt=False;TrustServerCertificate=True;
 
   gaiaweb:
     build:
