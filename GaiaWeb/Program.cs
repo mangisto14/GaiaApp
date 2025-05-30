@@ -6,10 +6,14 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpClient("GaiaApi", client =>
 {
     //client.BaseAddress = new Uri("https://localhost:7186/");
-    client.BaseAddress = new Uri("http://gaiaapi:8080/");
+    client.BaseAddress = new Uri("http://gaiaapi:8080");
 
-    
+
 });
+
+
+
+builder.WebHost.UseUrls("http://*:5001");
 
 var app = builder.Build();
 
